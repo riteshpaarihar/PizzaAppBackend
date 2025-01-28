@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
         maxlength: [10, "password must be at least 8 characters long"],
         select: false, // Hide password in response
     }
-}, { timestamps: true })
+}, { timestamps: true });
 
 
 const User = mongoose.model('User', userSchema);
