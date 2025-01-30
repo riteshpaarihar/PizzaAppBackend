@@ -1,13 +1,14 @@
-import userRepository from "../repository/userRepository.js";
-import UserService from "../services/userSevice.js";
+// import userRepository from "../repository/userRepository.js";
+// import UserService from "../services/userSevice.js";
+import registerUser from "../services/userSevice.js";
 
 async function createUser(req, res) {
     console.log("Creating user...");
     console.log(req.body);
 
-    const userService = new UserService(new userRepository());
+    //const userService = new UserService(new userRepository());
     try {
-        const responce = await userService.registerUser(req.body);
+        const responce = await registerUser(req.body);
 
         return res.json({
             data: responce,
