@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import bcrypt from 'bcrypt';
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -38,6 +38,14 @@ const userSchema = new mongoose.Schema({
         select: false, // Hide password in response
     }
 }, { timestamps: true });
+
+
+userSchema.pre('save', async function(req, res) {
+    const hashPassword = await bcrypt.hash(this.password, 10);
+    this.password = hashPassword;
+    console.log(this);
+
+})
 
 
 const User = mongoose.model('User', userSchema);

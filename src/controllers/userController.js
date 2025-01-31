@@ -3,8 +3,8 @@
 import registerUser from "../services/userSevice.js";
 
 async function createUser(req, res) {
-    console.log("Creating user...");
-    console.log(req.body);
+    //  console.log("Creating user...");
+    // console.log(req.body);
 
     //const userService = new UserService(new userRepository());
     try {
