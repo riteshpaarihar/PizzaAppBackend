@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         required: [true, "password is required for creating"],
         minlength: [10, "password must be at least 8 characters long"],
         maxlength: [10, "password must be at least 8 characters long"],
-        select: false, // Hide password in response
+        // select: false, // Hide password in response
     }
 }, { timestamps: true });
 
@@ -46,6 +46,8 @@ userSchema.pre('save', async function(req, res) {
     console.log(this);
 
 })
+
+
 
 
 const User = mongoose.model('User', userSchema);
