@@ -5,6 +5,9 @@ import User from "./schema/userSchema.js";
 import apiRoutes from './routes/apiRoutes.js'
 import cookieParser from 'cookie-parser';
 import isLoggedIn from "./validations/authValidator.js";
+import uploader from "./middleware/multerMiddleware.js";
+import cloudinary from "./config/cloudinaryConfig.js";
+import fs from "fs/promises";
 const app = express();
 
 
@@ -18,6 +21,18 @@ app.post('/home', isLoggedIn, (req, res) => {
     // res.send('Welcome Home');
     res.json({
         message: 'Welcome Home',
+        data: req.body
+    });
+})
+app.post('/uploade', uploader.single('image'), async(req, res) => {
+    console.log('File uploaded');
+    console.log(req.file);
+    const result = await cloudinary.uploader.upload(req.file.path);
+    console.log("result", result);
+
+    await fs.unlink(req.file.path);
+    res.json({
+        message: 'ok',
         data: req.body
     });
 })

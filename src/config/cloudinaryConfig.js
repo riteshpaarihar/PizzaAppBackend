@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
-import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUDE_NAME } from './serverConfig';
+import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUDE_NAME } from './serverConfig.js';
 
 
 
