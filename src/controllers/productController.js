@@ -1,5 +1,4 @@
-import createProduct from "../services/productService.js";
-
+import productService from '../services/productService.js';
 
 
 async function addProduct(req, res) {
@@ -13,7 +12,7 @@ async function addProduct(req, res) {
             });
         }
 
-        const product = await createProduct({
+        const product = await productService.createProduct({
             productName: req.body.productName,
             description: req.body.description,
             productPrice: req.body.productPrice,
