@@ -1,15 +1,9 @@
 import loginUser from "../services/authService.js";
 
-
 async function login(req, res) {
     try {
         const payload = req.body;
-
-
-
         const responce = await loginUser(payload);
-
-
         res.cookie("auth_token", responce, {
             httpOnly: true,
             secure: true,
@@ -30,6 +24,6 @@ async function login(req, res) {
         })
     }
 }
-
-
 export default login;
+
+// services/authService.js
