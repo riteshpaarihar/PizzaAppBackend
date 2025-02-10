@@ -7,6 +7,6 @@ cloudinary.config({
 
 });
 
-export default { cloudinary };
+export default cloudinary;
 
 //
