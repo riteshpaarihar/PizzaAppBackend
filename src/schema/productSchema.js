@@ -29,7 +29,7 @@ const productSchema = new mongoose.Schema({
         min: [0, "Product Price must be at least 0"],
         //  max: [1000, "Product Price must be less than 1000"]
     },
-    catgory: {
+    category: {
         type: String,
         required: [true, "Category is required"],
         enum: ["veg", "non veg", "drink", "slides", "Other"],

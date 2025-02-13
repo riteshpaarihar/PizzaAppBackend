@@ -7,7 +7,7 @@ async function createProduct(productDetails) {
         const response = await Product.create(productDetails);
         return response;
     } catch (error) {
-        if (error.name == "MongooseError") {
+        if (error.name === "MongooseError") {
             throw new InternalServerError();
         } else if (error.name == "validationError") {
             const errorMassageList = Object.keys(error.errors).map((property) => {
@@ -15,24 +15,41 @@ async function createProduct(productDetails) {
             })
             throw new BadRequestError(errorMassageList);
         }
+        console.log(error);
         // console.error("Error in repository createProduct:", error);
         //throw { statusCode: 500, message: "Database error", error: error };
     }
 }
 
+// async function getProductById(productId) {
+//     try {
+//         const response = await Product.findById(productId);
+//         return response;
+//     } catch (error) {
+//         console.error("Error in repository getProductById:", error);
+//         throw new InternalServerError();
+//     }
+// }
+
 async function getProductById(productId) {
     try {
-        const response = await Product.findById(productId);
-        return response;
+        console.log("Searching for product with ID:", productId);
+
+        const product = await Product.findById(productId);
+        console.log("Query Result:", product);
+
+        if (!product) {
+            console.log("Product not found in database");
+            return null;
+        }
+
+        return product;
     } catch (error) {
         console.error("Error in repository getProductById:", error);
-        throw {
-            statusCode: 500,
-            message: "Database error",
-            error: error
-        };
+        throw new Error(error.message || "Internal Server Error");
     }
 }
+
 
 async function getAllProducts() {
     try {

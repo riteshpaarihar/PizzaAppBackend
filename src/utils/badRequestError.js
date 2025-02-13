@@ -4,9 +4,9 @@ import AppError from "./appError.js";
 class BadRequestError extends AppError {
     constructor(invailidParam) {
         let massage = "";
-        invailidParam.forEach(param => massage += `${param}`);
-        super(`Bad Request: Invalid ${massage}`);
-        this.statusCode = 400;
+        invailidParam.forEach(param => massage += `${param}\n`);
+        super(`Bad Request: Invalid ${massage}`, 400);
+
     }
 }
 
