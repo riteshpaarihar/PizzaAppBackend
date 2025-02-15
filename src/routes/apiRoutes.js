@@ -14,5 +14,5 @@ router.use("/v1/card", cardRoutes);
 router.use("/v1/auth", authRoutes);
 // product routes
 router.use("/v1/product", productRouter);
-
+//router.use("/v1/product", productRouter);
 export default router;
