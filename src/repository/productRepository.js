@@ -31,6 +31,27 @@ async function createProduct(productDetails) {
 //     }
 // }
 
+// async function getProductById(productId) {
+//     try {
+//         console.log("Searching for product with ID:", productId);
+
+//         const product = await Product.findById(productId);
+//         console.log("Query Result:", product);
+
+//         if (!product) {
+//             console.log("Product not found in database");
+//             return null;
+//         }
+
+//         return product;
+//       //  return product.toObject();
+//     } catch (error) {
+//         console.error("Error in repository getProductById:", error);
+//         throw new Error(error.message || "Internal Server Error");
+//     }
+// }
+
+
 async function getProductById(productId) {
     try {
         console.log("Searching for product with ID:", productId);
@@ -40,9 +61,10 @@ async function getProductById(productId) {
 
         if (!product) {
             console.log("Product not found in database");
-            return null;
+            return null; // Return null explicitly
         }
 
+        console.log("Returning Product:", product);
         return product;
     } catch (error) {
         console.error("Error in repository getProductById:", error);

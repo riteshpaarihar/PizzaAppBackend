@@ -60,6 +60,7 @@ export async function addProduct(req, res) {
 export async function getProduct(req, res) {
     try {
         const productId = req.params.id;
+        // console.log("Received Request for Product ID:", productId);
 
         // Check if productId is a valid MongoDB ObjectId
         if (!productId.match(/^[0-9a-fA-F]{24}$/)) {
@@ -70,17 +71,20 @@ export async function getProduct(req, res) {
                 error: {},
             });
         }
-
+        // console.log("productService:", productService); // Debugging statement
+        // console.log("Does getProductById exist?", productService.getProductById);
         const response = await productService.getProductById(productId);
 
-        if (!response) {
-            return res.status(404).json({
-                success: false,
-                message: "Product not found",
-                data: {},
-                error: {},
-            });
-        }
+        console.log("Final Response:", response);
+
+        // if (!response) {
+        //     return res.status(404).json({
+        //         success: false,
+        //         message: "Product not foundd",
+        //         data: {},
+        //         error: {},
+        //     });
+        // }
 
         return res.status(200).json({
             success: true,
