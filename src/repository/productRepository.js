@@ -89,8 +89,8 @@ async function getAllProducts() {
 
 async function deleteProductById(productId) {
     try {
-        await Product.findByIdAndDelete(productId);
-        return { message: "Product deleted successfully" };
+        const response = await Product.findByIdAndDelete(productId);
+        return response;
     } catch (error) {
         console.error("Error in repository deleteProductById:", error);
         throw {
