@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config/serverConfig.js';
+import UnauthorizedError from '../utils/unauthorizedError.js';
+//import { error } from 'console';
 
 async function isLoggedIn(req, res, next) {
     try {
@@ -17,9 +19,13 @@ async function isLoggedIn(req, res, next) {
         // Verify token inside a try-catch to handle potential errors
         try {
             const decoded = jwt.verify(token, JWT_SECRET);
+            if (!decoded) {
+                throw new UnauthorizedError();
+            }
             req.user = {
                 email: decoded.email,
-                id: decoded.id
+                id: decoded.id,
+                role: decoded.role,
             };
             next();
         } catch (err) {
@@ -40,4 +46,38 @@ async function isLoggedIn(req, res, next) {
     }
 }
 
+
+// async function isAdmin(req, res) {
+//     const loggedInUser = await req.user;
+//     if (loggedInUser.role === "ADMIN") {
+//         next();
+//     }
+//     return res.status(401).json({
+//         data: {},
+//         success: false,
+//         massage: "You are not authorized to access this action",
+//         error: {
+//             message: "You are not authorized to access this action",
+//             status: 401,
+//             type: "Unauthorized"
+//         }
+//     })
+// }
+
+async function isAdmin(req, res, next) {
+    if (!req.user || req.user.role !== "ADMIN") {
+        return res.status(401).json({
+            data: {},
+            success: false,
+            message: "You are not authorized to access this action",
+            error: {
+                message: "You are not authorized to access this action",
+                status: 401,
+                type: "Unauthorized"
+            }
+        });
+    }
+    next();
+}
 export default isLoggedIn;
+export { isLoggedIn, isAdmin };

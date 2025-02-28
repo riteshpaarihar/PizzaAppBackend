@@ -23,9 +23,9 @@ async function loginUser(authDetails) {
         throw { message: "Incorrect Password", statusCode: 401 };
     }
 
+    const userRole = user.role ? user.role : "USER";
 
-
-    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: JWT_EXPIRE });
+    const token = jwt.sign({ id: user._id, email: user.email, role: userRole }, JWT_SECRET, { expiresIn: JWT_EXPIRE });
     return token;
 
 }
